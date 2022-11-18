@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Funcionario;
 use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
@@ -13,7 +14,8 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        //
+        $funcionarios = Funcionario::all();
+        return view('funcionario.index', ['funcionarios' => $funcionarios]);
     }
 
     /**
@@ -56,7 +58,8 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $funcionarios = Funcionario::find($id);
+        return view('funcionario.edit', ['funcionario' => $funcionarios]);
     }
 
     /**
@@ -68,7 +71,11 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        $funcionario->fill($request->toArray());
+        $funcionario->save();
+        return redirect()->route('funcionario.index');
+
     }
 
     /**
@@ -79,6 +86,8 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        $funcionario->delete();
+        return redirect()->route('funcionario.index');
     }
 }

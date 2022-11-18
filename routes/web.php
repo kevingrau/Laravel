@@ -21,10 +21,10 @@ Route::get('/', function () {
 Route::prefix('funcionario')->group(function(){
     Route::get('',[FuncionarioController::class,'index'])->name('funcionario.index');
     Route::get('/create',[FuncionarioController::class,'create'])->name('funcionario.create');
-    Route::get('',[FuncionarioController::class,'store'])->name('funcionario.store');
+    Route::post('',[FuncionarioController::class,'store'])->name('funcionario.store');
     Route::get('/{id}',[FuncionarioController::class,'show'])->name('funcionario.show');
     Route::get('/{id}/edit',[FuncionarioController::class,'edit'])->name('funcionario.edit');
-    Route::get('/{id}/update',[FuncionarioController::class,'update'])->name('funcionario.update');
-    Route::get('/{id}/delete',[FuncionarioController::class,'delete'])->name('funcionario.delete');
+    Route::post('/{id}/update',[FuncionarioController::class,'update'])->name('funcionario.update');
+    Route::get('/{id}/delete',[FuncionarioController::class,'destroy'])->name('funcionario.delete');
     
 });
