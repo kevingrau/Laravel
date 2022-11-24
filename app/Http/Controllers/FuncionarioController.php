@@ -25,7 +25,7 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('funcionario.create');
     }
 
     /**
@@ -36,7 +36,13 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Funcionario::create([
+            'nome' => $request['nome'],
+            'dtNascto' => $request['dtNascto'],
+            'salario' => $request['salario'],
+            'status' => $request['status']
+        ]);
+        return redirect()->route('funcionario.index');
     }
 
     /**
@@ -47,7 +53,8 @@ class FuncionarioController extends Controller
      */
     public function show($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        return view('funcionario.show',['funcionario' => $funcionario]);
     }
 
     /**
